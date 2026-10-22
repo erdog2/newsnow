@@ -10,6 +10,7 @@ import { GlobalOverlayScrollbar } from "~/components/common/overlay-scrollbar"
 import { Toast } from "~/components/common/toast"
 import { SearchBar } from "~/components/common/search-bar"
 import { HudBackground } from "~/components/common/hud-background"
+import { VisitStats } from "~/components/common/visit-stats"
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient
@@ -61,6 +62,9 @@ function RootComponent() {
         >
           <Outlet />
         </main>
+        <div className="flex justify-center py-4 md:py-6 text-[10px] md:text-[11px] tracking-wider color-[#22e4ff]/70">
+          <VisitStats />
+        </div>
       </GlobalOverlayScrollbar>
       <Toast />
       <SearchBar />

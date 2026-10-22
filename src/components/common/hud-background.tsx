@@ -63,12 +63,6 @@ export function HudBackground() {
       <div className="hud-bg-grid" />
       <MatrixRain />
       <div className="hud-scanlines" />
-      <span className="hud-corner-text hidden md:block bottom-3 left-4">
-        SYS.FEED LIVE [0x92A]
-      </span>
-      <span className="hud-corner-text hidden md:block bottom-3 right-4">
-        DATA_STREAM: SECURE
-      </span>
     </>
   )
 }
