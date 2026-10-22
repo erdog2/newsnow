@@ -1,4 +1,5 @@
 import "~/styles/globals.css"
+import "~/styles/cards.css"
 import "virtual:uno.css"
 import { Outlet, createRootRouteWithContext } from "@tanstack/react-router"
 import { TanStackRouterDevtools } from "@tanstack/router-devtools"
@@ -11,6 +12,7 @@ import { Toast } from "~/components/common/toast"
 import { SearchBar } from "~/components/common/search-bar"
 import { HudBackground } from "~/components/common/hud-background"
 import { VisitStats } from "~/components/common/visit-stats"
+import { useApplyTheme, useTheme } from "~/hooks/useTheme"
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient
@@ -30,9 +32,11 @@ function RootComponent() {
   useOnReload()
   useSync()
   usePWA()
+  useApplyTheme()
+  const { theme, isHud } = useTheme()
   return (
     <>
-      <HudBackground />
+      {isHud && <HudBackground />}
       <GlobalOverlayScrollbar
         className={$([
           !isMobile && "px-4",
@@ -62,7 +66,7 @@ function RootComponent() {
         >
           <Outlet />
         </main>
-        <div className="flex justify-center py-4 md:py-6 text-[10px] md:text-[11px] tracking-wider color-[#22e4ff]/70">
+        <div className={$("flex justify-center py-4 md:py-6 text-[10px] md:text-[11px] tracking-wider", theme === "book" ? "color-[#d6b36a]/70" : theme === "cards" ? "color-[#a5b4fc]/70" : "color-[#22e4ff]/70")}>
           <VisitStats />
         </div>
       </GlobalOverlayScrollbar>

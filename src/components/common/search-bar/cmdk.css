@@ -352,7 +352,464 @@
   color: rgba(255, 59, 92, 0.8);
 }
 
+/* ---------- 书本主题 ---------- */
+html.theme-book [cmdk-overlay] {
+  background: rgba(24, 14, 7, 0.68);
+  backdrop-filter: blur(2px);
+}
+
+html.theme-book [cmdk-dialog] {
+  --hud-ink: color-mix(in srgb, var(--hud) 55%, #2b1a10);
+  font-family: var(--serif);
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image: var(--paper-noise);
+  border: none;
+  border-radius: 6px;
+  box-shadow:
+    0 0 0 6px var(--leather),
+    0 0 0 7px rgba(214, 179, 106, 0.55),
+    0 0 0 12px var(--leather),
+    0 40px 80px -20px rgba(0, 0, 0, 0.8);
+  clip-path: none;
+  animation: bookDialogIn 0.25s ease-out forwards;
+}
+
+html.theme-book [cmdk-dialog][data-state=closed] {
+  animation: bookDialogOut 0.16s forwards;
+}
+
+@keyframes bookDialogIn {
+  from { opacity: 0; transform: translate(round(-50%, 1px), calc(round(-50%, 1px) + 12px)) scale(0.98); }
+  to { opacity: 1; transform: translate(round(-50%, 1px), round(-50%, 1px)); }
+}
+
+@keyframes bookDialogOut {
+  to { opacity: 0; transform: translate(round(-50%, 1px), calc(round(-50%, 1px) + 8px)); }
+}
+
+html.theme-book [cmdk-dialog] .os-theme-dark {
+  --os-handle-bg: rgba(90, 60, 30, 0.25);
+  --os-handle-bg-hover: rgba(90, 60, 30, 0.45);
+  --os-handle-bg-active: rgba(90, 60, 30, 0.6);
+}
+
+html.theme-book .hud-search-tag,
+html.theme-book .hud-search-footer {
+  padding: 8px 18px;
+  font-family: var(--serif);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--ink-soft);
+  background: none;
+}
+
+html.theme-book .hud-search-tag {
+  border-bottom: 1px dashed rgba(80, 55, 30, 0.3);
+}
+
+html.theme-book .hud-search-footer {
+  letter-spacing: 0.1em;
+  border-top: 1px dashed rgba(80, 55, 30, 0.3);
+}
+
+html.theme-book [cmdk-dialog] kbd {
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--ink);
+  border: 1px solid rgba(80, 55, 30, 0.35);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  background: rgba(255, 252, 244, 0.7);
+}
+
+html.theme-book .hud-search-input {
+  margin: 12px 18px 0;
+  padding: 0 4px;
+  border: none;
+  border-bottom: 3px double rgba(43, 33, 24, 0.7);
+  background: none;
+  box-shadow: none;
+}
+
+html.theme-book .hud-search-input:focus-within {
+  border-color: #7d2219;
+  box-shadow: none;
+}
+
+html.theme-book .hud-search-input::before {
+  display: none;
+}
+
+html.theme-book .hud-search-glyph {
+  color: #a0442c;
+  filter: none;
+}
+
+html.theme-book [cmdk-input] {
+  font-size: 18px;
+  color: var(--ink);
+  caret-color: #a0442c;
+}
+
+html.theme-book [cmdk-input]::placeholder {
+  color: rgba(122, 102, 80, 0.6);
+}
+
+html.theme-book .hud-search-clear {
+  color: var(--ink-soft);
+}
+
+html.theme-book .hud-search-clear:hover {
+  color: #a3362a;
+}
+
+html.theme-book .hud-search-modes,
+html.theme-book .hud-search-filters {
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+html.theme-book .hud-search-mode {
+  color: var(--ink-soft);
+  border: 1px solid rgba(80, 55, 30, 0.25);
+  border-radius: 3px;
+  background: none;
+}
+
+html.theme-book .hud-search-mode:hover {
+  color: var(--ink);
+  border-color: rgba(80, 55, 30, 0.5);
+}
+
+/* 选中模式做成书签丝带 */
+html.theme-book .hud-search-mode.active {
+  color: #fff3e0;
+  border-color: transparent;
+  background: linear-gradient(180deg, #a3362a, #7d2219);
+  box-shadow: 0 2px 5px rgba(60, 20, 10, 0.3);
+}
+
+html.theme-book .hud-search-mode.active kbd {
+  color: #fff3e0;
+  border-color: rgba(255, 243, 224, 0.5);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+html.theme-book .hud-search-hint {
+  font-family: var(--serif);
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+
+html.theme-book .hud-search-chip {
+  color: var(--ink-soft);
+  border-color: rgba(80, 55, 30, 0.25);
+  border-radius: 9999px;
+  padding: 1px 10px;
+}
+
+html.theme-book .hud-search-chip:hover {
+  color: var(--ink);
+  border-color: rgba(80, 55, 30, 0.55);
+}
+
+html.theme-book .hud-search-chip.active {
+  color: var(--paper);
+  background: var(--ink);
+  border-color: var(--ink);
+  box-shadow: none;
+}
+
+html.theme-book [cmdk-group-heading] {
+  margin: 12px 4px 4px;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  color: #7d2219;
+  border-bottom: 1px solid rgba(80, 55, 30, 0.2);
+  padding-bottom: 3px;
+}
+
+html.theme-book [cmdk-group-heading]::before {
+  content: "§ ";
+  color: #a0442c;
+}
+
+html.theme-book [cmdk-item] {
+  border-radius: 3px;
+}
+
+html.theme-book [cmdk-item]:hover {
+  background: rgba(80, 50, 20, 0.06);
+}
+
+html.theme-book [cmdk-item][data-selected=true] {
+  background: color-mix(in srgb, var(--hud-ink) 10%, transparent);
+  border-color: transparent;
+  box-shadow: inset 3px 0 0 var(--hud-ink);
+}
+
+html.theme-book [cmdk-item] .i-ph\:star-fill {
+  color: #b8860b;
+}
+
+html.theme-book .hud-search-icon {
+  box-shadow: 0 0 0 1px var(--paper), 0 0 0 2px color-mix(in srgb, var(--hud) 55%, #2b1a10);
+}
+
+html.theme-book .hud-search-dim,
+html.theme-book .hud-search-meta {
+  color: var(--ink-soft);
+}
+
+html.theme-book .hud-search-meta {
+  font-family: var(--serif);
+  font-style: italic;
+}
+
+html.theme-book .hud-search-src {
+  color: var(--hud-ink);
+  font-style: normal;
+}
+
+html.theme-book .hud-search-news {
+  border-bottom: 1px dashed rgba(80, 55, 30, 0.18);
+}
+
+html.theme-book .hud-hl {
+  color: inherit;
+  padding: 0 1px;
+  background: linear-gradient(transparent 45%, rgba(230, 170, 50, 0.55) 45%);
+  box-shadow: none;
+}
+
+html.theme-book .hud-search-suggest,
+html.theme-book .hud-search-engine-icon {
+  color: #a0442c;
+}
+
+html.theme-book .hud-search-stat {
+  font-family: var(--serif);
+  font-style: italic;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+
+html.theme-book [cmdk-empty] {
+  font-family: var(--serif);
+  color: var(--ink-soft);
+}
+
+/* ---------- 抽卡主题 ---------- */
+html.theme-cards [cmdk-overlay] {
+  background: rgba(5, 6, 15, 0.72);
+  backdrop-filter: blur(4px);
+}
+
+html.theme-cards [cmdk-dialog] {
+  color: var(--gc-text);
+  border: 3px solid transparent;
+  border-radius: 22px;
+  background:
+    linear-gradient(160deg, rgba(22, 26, 52, 0.98), rgba(10, 12, 28, 0.99)) padding-box,
+    var(--gc-rainbow) border-box;
+  box-shadow: 0 0 50px -12px rgba(32, 164, 246, 0.5), 0 40px 80px -20px rgba(0, 0, 0, 0.8);
+  clip-path: none;
+  animation: cardDialogIn 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.15) forwards;
+}
+
+html.theme-cards [cmdk-dialog][data-state=closed] {
+  animation: cardDialogOut 0.16s forwards;
+}
+
+@keyframes cardDialogIn {
+  from { opacity: 0; transform: translate(round(-50%, 1px), calc(round(-50%, 1px) + 40px)) rotate(-3deg) scale(0.94); }
+  to { opacity: 1; transform: translate(round(-50%, 1px), round(-50%, 1px)); }
+}
+
+@keyframes cardDialogOut {
+  to { opacity: 0; transform: translate(round(-50%, 1px), calc(round(-50%, 1px) + 20px)) scale(0.97); }
+}
+
+html.theme-cards .hud-search-tag,
+html.theme-cards .hud-search-footer {
+  padding: 8px 20px;
+  font-family: inherit;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--gc-violet);
+  background: none;
+}
+
+html.theme-cards .hud-search-tag {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+html.theme-cards .hud-search-footer {
+  color: var(--gc-soft);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+html.theme-cards [cmdk-dialog] kbd {
+  font-family: inherit;
+  color: #c7d2fe;
+  border: 1px solid rgba(165, 180, 252, 0.35);
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+html.theme-cards .hud-search-input {
+  margin: 14px 18px 0;
+  border: 1px solid rgba(165, 180, 252, 0.28);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: none;
+}
+
+html.theme-cards .hud-search-input:focus-within {
+  border-color: #20a4f6;
+  box-shadow: 0 0 0 3px rgba(32, 164, 246, 0.2), 0 0 18px rgba(32, 164, 246, 0.25);
+}
+
+html.theme-cards .hud-search-input::before {
+  display: none;
+}
+
+html.theme-cards .hud-search-glyph {
+  color: #84ccfc;
+  filter: none;
+}
+
+html.theme-cards [cmdk-input] {
+  caret-color: #84ccfc;
+}
+
+html.theme-cards [cmdk-input]::placeholder {
+  color: rgba(165, 180, 252, 0.5);
+}
+
+html.theme-cards .hud-search-modes,
+html.theme-cards .hud-search-filters {
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+html.theme-cards .hud-search-mode {
+  color: #c7d2fe;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  background: none;
+}
+
+html.theme-cards .hud-search-mode:hover {
+  color: #fff;
+  border-color: rgba(132, 204, 252, 0.6);
+}
+
+html.theme-cards .hud-search-mode.active {
+  color: #fff;
+  border-color: transparent;
+  background: var(--gc-blue);
+  box-shadow: 0 0 14px rgba(32, 164, 246, 0.5);
+}
+
+html.theme-cards .hud-search-mode.active kbd {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+html.theme-cards .hud-search-hint {
+  font-family: inherit;
+  color: var(--gc-soft);
+}
+
+html.theme-cards .hud-search-chip {
+  padding: 1px 10px;
+  color: #c7d2fe;
+  border-color: rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+}
+
+html.theme-cards .hud-search-chip:hover {
+  color: #fff;
+  border-color: rgba(252, 211, 107, 0.6);
+}
+
+html.theme-cards .hud-search-chip.active {
+  color: #1a1200;
+  border-color: transparent;
+  background: var(--gc-gold);
+  box-shadow: 0 0 10px rgba(246, 173, 32, 0.5);
+}
+
+html.theme-cards [cmdk-group-heading] {
+  font-family: inherit;
+  font-weight: 700;
+  color: var(--gc-violet);
+}
+
+html.theme-cards [cmdk-group-heading]::before {
+  content: "◆ ";
+  color: #f6ad20;
+}
+
+html.theme-cards [cmdk-item] {
+  border-radius: 10px;
+}
+
+html.theme-cards [cmdk-item]:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+html.theme-cards [cmdk-item][data-selected=true] {
+  background: color-mix(in srgb, var(--hud) 12%, transparent);
+  border-color: color-mix(in srgb, var(--hud) 45%, transparent);
+  box-shadow: 0 0 14px -4px color-mix(in srgb, var(--hud) 60%, transparent);
+}
+
+html.theme-cards [cmdk-item] .i-ph\:star-fill {
+  color: #f6ad20;
+}
+
+html.theme-cards .hud-search-dim,
+html.theme-cards .hud-search-meta {
+  font-family: inherit;
+  color: var(--gc-soft);
+}
+
+html.theme-cards .hud-hl {
+  color: #1a1200;
+  padding: 0 3px;
+  border-radius: 4px;
+  background: var(--gc-gold);
+  box-shadow: none;
+}
+
+html.theme-cards .hud-search-suggest,
+html.theme-cards .hud-search-engine-icon {
+  color: #84ccfc;
+}
+
+html.theme-cards .hud-search-stat {
+  font-family: inherit;
+  color: var(--gc-violet);
+}
+
+html.theme-cards [cmdk-empty] {
+  font-family: inherit;
+  color: var(--gc-violet);
+}
+
 @media (max-width: 767px) {
+  html.theme-cards [cmdk-dialog],
+  html.theme-cards [cmdk-dialog][data-state=closed],
+  html.theme-book [cmdk-dialog],
+  html.theme-book [cmdk-dialog][data-state=closed] {
+    animation: none;
+  }
+
   [cmdk-dialog] {
     top: 12px;
     transform: translateX(round(-50%, 1px));

@@ -6,7 +6,11 @@ import { useQuery } from "@tanstack/react-query"
 import pinyin from "@shared/pinyin.json"
 import { OverlayScrollbar } from "../overlay-scrollbar"
 import { CardWrapper } from "~/components/column/card"
+import { BookPreview } from "~/components/column/book"
+import { CardPreview } from "~/components/column/cards"
 import { focusSourcesAtom } from "~/atoms"
+import type { Theme } from "~/hooks/useTheme"
+import { useTheme } from "~/hooks/useTheme"
 import { hudColor } from "~/utils/hud"
 
 import "./cmdk.css"
@@ -18,6 +22,12 @@ const modes: { id: Mode, label: string, prefix: string, icon: string }[] = [
   { id: "news", label: "新闻", prefix: "#", icon: "i-ph:newspaper-bold" },
   { id: "web", label: "全网", prefix: "?", icon: "i-ph:globe-hemisphere-east-bold" },
 ]
+
+const copy: Record<Theme, { title: string, esc: string, empty: string, loading: string, footer: string }> = {
+  hud: { title: "", esc: "ESC 关闭", empty: "NO SIGNAL · 没有匹配的信息源", loading: "SCANNING DATA MATRIX…", footer: "SECURE CHANNEL" },
+  book: { title: "检索", esc: "ESC 合上", empty: "没有匹配的信息源", loading: "正在翻阅全部新闻…", footer: "THE DAILY NEWS BOOK" },
+  cards: { title: "牌库", esc: "ESC 收起", empty: "没有匹配的卡牌", loading: "正在洗牌…", footer: "DRAW YOUR NEWS" },
+}
 
 const prefixMap: Record<string, Mode> = { "@": "source", "#": "news", "＃": "news", "?": "web", "？": "web" }
 
@@ -195,6 +205,8 @@ function hotDigest(data: SourceResponse[] | undefined): NewsHit[] {
 
 export function SearchBar() {
   const { opened, toggle } = useSearchBar()
+  const { theme, isHud } = useTheme()
+  const t = copy[theme]
   const focusSources = useAtomValue(focusSourcesAtom)
   const allSourceItems = useMemo(
     () =>
@@ -286,10 +298,10 @@ export function SearchBar() {
       }}
     >
       <div className="hud-search-tag">
-        <span>{`QUERY.TERMINAL // ${mode.toUpperCase()}_SCAN`}</span>
+        <span>{isHud ? `QUERY.TERMINAL // ${mode.toUpperCase()}_SCAN` : `${t.title} · ${currentMode.label}`}</span>
         <span className="flex items-center gap-3">
-          <span className="hud-blink color-[#3dff8f]">● LINK</span>
-          <span className="max-md:hidden">ESC 关闭</span>
+          {isHud && <span className="hud-blink color-[#3dff8f]">● LINK</span>}
+          <span className="max-md:hidden">{t.esc}</span>
         </span>
       </div>
 
@@ -343,7 +355,7 @@ export function SearchBar() {
           <Command.List>
             {mode === "source" && (
               <>
-                <Command.Empty>NO SIGNAL · 没有匹配的信息源</Command.Empty>
+                <Command.Empty>{t.empty}</Command.Empty>
                 {sourceGroups.map(({ column, sources }) => (
                   <Command.Group heading={column} key={column}>
                     {sources.map(item => <SourceItem item={item} key={item.id} />)}
@@ -376,7 +388,7 @@ export function SearchBar() {
               <>
                 <div className="hud-search-stat">
                   {newsLoading && !allNews
-                    ? <span className="hud-blink">SCANNING DATA MATRIX…</span>
+                    ? <span className="hud-blink">{t.loading}</span>
                     : tokens.length
                       ? `扫描 ${allNews?.length ?? 0} 个源 / ${totalNews} 条 · 命中 ${newsHits.length >= 100 ? "100+" : newsHits.length} 条`
                       : `热点速览 · 各热榜 TOP1（共 ${allNews?.length ?? 0} 个源已缓存）`}
@@ -433,7 +445,11 @@ export function SearchBar() {
         </OverlayScrollbar>
         {mode === "source" && (
           <div className="flex-1 pt-2 px-4 min-w-350px max-md:hidden">
-            <CardWrapper id={preview} />
+            {theme === "book"
+              ? <div className="h-[min(410px,calc(100vh-300px))]"><BookPreview id={preview} /></div>
+              : theme === "cards"
+                ? <div className="h-[min(410px,calc(100vh-300px))]"><CardPreview id={preview} /></div>
+                : <CardWrapper id={preview} />}
           </div>
         )}
       </div>
@@ -452,7 +468,7 @@ export function SearchBar() {
             {" 唤起"}
           </span>
         </span>
-        <span>SECURE CHANNEL</span>
+        <span>{t.footer}</span>
       </div>
     </Command.Dialog>
   )

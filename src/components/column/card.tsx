@@ -50,9 +50,8 @@ export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging
   )
 })
 
-function NewsCard({ id, setHandleRef }: NewsCardProps) {
-  const { refresh } = useRefetch()
-  const { data, isFetching, isError } = useQuery({
+export function useSourceQuery(id: SourceID) {
+  return useQuery({
     queryKey: ["source", id],
     queryFn: async ({ queryKey }) => {
       const id = queryKey[1] as SourceID
@@ -101,7 +100,11 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
     refetchOnWindowFocus: false,
     retry: false,
   })
+}
 
+function NewsCard({ id, setHandleRef }: NewsCardProps) {
+  const { refresh } = useRefetch()
+  const { data, isFetching, isError } = useSourceQuery(id)
   const { isFocused, toggleFocus } = useFocusWith(id)
 
   const status = isError ? "err" : isFetching ? "sync" : "ok"
@@ -199,14 +202,14 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
   )
 }
 
-function UpdatedTime({ isError, updatedTime }: { updatedTime: any, isError: boolean }) {
+export function UpdatedTime({ isError, updatedTime }: { updatedTime: any, isError: boolean }) {
   const relativeTime = useRelativeTime(updatedTime ?? "")
   if (relativeTime) return `${relativeTime}更新`
   if (isError) return "获取失败"
   return "加载中..."
 }
 
-function DiffNumber({ diff }: { diff: number }) {
+export function DiffNumber({ diff }: { diff: number }) {
   const [shown, setShown] = useState(true)
   useEffect(() => {
     setShown(true)
@@ -231,7 +234,7 @@ function DiffNumber({ diff }: { diff: number }) {
     </AnimatePresence>
   )
 }
-function ExtraInfo({ item }: { item: NewsItem }) {
+export function ExtraInfo({ item }: { item: NewsItem }) {
   if (item?.extra?.info) {
     return <>{item.extra.info}</>
   }
@@ -251,7 +254,7 @@ function ExtraInfo({ item }: { item: NewsItem }) {
   }
 }
 
-function NewsUpdatedTime({ date }: { date: string | number }) {
+export function NewsUpdatedTime({ date }: { date: string | number }) {
   const relativeTime = useRelativeTime(date)
   return <>{relativeTime}</>
 }
