@@ -8,13 +8,17 @@ export async function rss2json(url: string): Promise<RSSInfo | undefined> {
     responseType: "text",
   })
 
+  return parseRSS(data as string)
+}
+
+export function parseRSS(data: string): RSSInfo {
   const xml = new XMLParser({
     attributeNamePrefix: "",
     textNodeName: "$text",
     ignoreAttributes: false,
   })
 
-  const result = xml.parse(data as string)
+  const result = xml.parse(data)
 
   let channel = result.rss && result.rss.channel ? result.rss.channel : result.feed
   if (Array.isArray(channel)) channel = channel[0]

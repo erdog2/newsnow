@@ -5,6 +5,7 @@ import { useWindowSize } from "react-use"
 import { forwardRef, useImperativeHandle } from "react"
 import { OverlayScrollbar } from "../common/overlay-scrollbar"
 import { safeParseString } from "~/utils"
+import { hudColor, hudHex } from "~/utils/hud"
 
 export interface ItemsProps extends React.HTMLAttributes<HTMLDivElement> {
   id: SourceID
@@ -33,16 +34,15 @@ export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging
     <div
       ref={ref}
       className={$(
-        "flex flex-col h-500px rounded-2xl p-4 cursor-default",
-        // "backdrop-blur-5",
+        "hud-panel flex flex-col h-500px cursor-default",
         "transition-opacity-300",
         isDragging && "op-50",
-        `bg-${sources[id].color}-500 dark:bg-${sources[id].color} bg-op-40!`,
       )}
       style={{
-        transformOrigin: "50% 50%",
+        "transformOrigin": "50% 50%",
+        "--hud": hudColor(sources[id].color),
         ...style,
-      }}
+      } as React.CSSProperties}
       {...props}
     >
       {inView && <NewsCard id={id} setHandleRef={setHandleRef} />}
@@ -104,12 +104,28 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
 
   const { isFocused, toggleFocus } = useFocusWith(id)
 
+  const status = isError ? "err" : isFetching ? "sync" : "ok"
+
   return (
     <>
-      <div className={$("flex justify-between mx-2 mt-0 mb-2 items-center")}>
-        <div className="flex gap-2 items-center">
+      <div className="hud-tag">
+        <span className="hud-tag-label">
+          {`${id.toUpperCase()} // ${sources[id].type === "hottest" ? "HOT_RANK" : "LIVE_FEED"}`}
+        </span>
+        <span className="flex items-center gap-2">
+          <span className={$("hud-status", status, status !== "ok" && "hud-blink")}>
+            {status === "err" ? "OFFLINE" : status === "sync" ? "SYNCING" : "ONLINE"}
+          </span>
+          <span className="hud-signal">
+            {[4, 6, 8, 10].map((h, i) => <i key={h} className={$(isError && i > 0 && "off")} style={{ height: `${h}px` }} />)}
+          </span>
+        </span>
+      </div>
+
+      <div className="flex justify-between gap-2 px-3 pt-3 pb-2 items-center">
+        <div className="flex gap-2 items-center min-w-0">
           <a
-            className={$("w-8 h-8 rounded-full bg-cover")}
+            className="hud-icon w-8 h-8 shrink-0 bg-cover"
             target="_blank"
             href={sources[id].home}
             title={sources[id].desc}
@@ -117,45 +133,53 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
               backgroundImage: `url(/icons/${id.split("-")[0]}.png)`,
             }}
           />
-          <span className="flex flex-col">
-            <span className="flex items-center gap-2">
+          <span className="flex flex-col min-w-0">
+            <span className="flex items-center gap-2 min-w-0">
               <span
-                className="text-xl font-bold"
+                className="hud-title text-xl font-bold truncate"
                 title={sources[id].desc}
               >
                 {sources[id].name}
               </span>
-              {sources[id]?.title && <span className={$("text-sm", `color-${sources[id].color} bg-base op-80 bg-op-50! px-1 rounded`)}>{sources[id].title}</span>}
+              {sources[id]?.title && <span className="hud-chip shrink-0">{sources[id].title}</span>}
             </span>
-            <span className="text-xs op-70"><UpdatedTime isError={isError} updatedTime={data?.updatedTime} /></span>
+            <span className="font-hud text-xs color-[#8fb8d6]"><UpdatedTime isError={isError} updatedTime={data?.updatedTime} /></span>
           </span>
         </div>
-        <div className={$("flex gap-2 text-lg", `color-${sources[id].color}`)}>
+        <div className="flex gap-1.5">
           <button
             type="button"
-            className={$("btn i-ph:arrow-counter-clockwise-duotone", isFetching && "animate-spin i-ph:circle-dashed-duotone")}
+            title="刷新"
+            className="hud-btn"
             onClick={() => refresh(id)}
-          />
+          >
+            <span className={$("i-ph:arrow-counter-clockwise-bold", isFetching && "animate-spin i-ph:circle-dashed-bold")} />
+          </button>
           <button
             type="button"
-            className={$("btn", isFocused ? "i-ph:star-fill" : "i-ph:star-duotone")}
+            title="收藏"
+            className={$("hud-btn", isFocused && "active")}
             onClick={toggleFocus}
-          />
+          >
+            <span className={isFocused ? "i-ph:star-fill" : "i-ph:star-bold"} />
+          </button>
           {/* firefox cannot drag a button */}
           {setHandleRef && (
             <div
               ref={setHandleRef}
-              className={$("btn", "i-ph:dots-six-vertical-duotone", "cursor-grab")}
-            />
+              title="拖动排序"
+              className="hud-btn cursor-grab"
+            >
+              <span className="i-ph:dots-six-vertical-bold cursor-grab" />
+            </div>
           )}
         </div>
       </div>
 
       <OverlayScrollbar
         className={$([
-          "h-full p-2 overflow-y-auto rounded-2xl bg-base bg-op-70!",
+          "hud-screen h-full mx-3 p-2 overflow-y-auto",
           isFetching && `animate-pulse`,
-          `sprinkle-${sources[id].color}`,
         ])}
         options={{
           overflow: { x: "hidden" },
@@ -166,6 +190,11 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
           {!!data?.items?.length && (sources[id].type === "hottest" ? <NewsListHot items={data.items} /> : <NewsListTimeLine items={data.items} />)}
         </div>
       </OverlayScrollbar>
+
+      <div className="hud-footer px-3 py-1.5">
+        <span className="truncate">{`FEED ${hudHex(id)} · ${data?.items?.length ?? 0} ITEMS`}</span>
+        <span className="shrink-0">SECURE</span>
+      </div>
     </>
   )
 }
@@ -229,29 +258,31 @@ function NewsUpdatedTime({ date }: { date: string | number }) {
 function NewsListHot({ items }: { items: NewsItem[] }) {
   const { width } = useWindowSize()
   return (
-    <ol className="flex flex-col gap-2">
+    <ol className="flex flex-col gap-1.5">
       {items?.map((item, i) => (
         <a
           href={width < 768 ? item.mobileUrl || item.url : item.url}
           target="_blank"
           key={item.id}
           title={item.extra?.hover}
-          className={$(
-            "flex gap-2 items-center items-stretch relative cursor-pointer [&_*]:cursor-pointer transition-all",
-            "hover:bg-neutral-400/10 rounded-md pr-1 visited:(text-neutral-400)",
-          )}
+          className="hud-row flex gap-2 items-stretch relative p-1 cursor-pointer [&_*]:cursor-pointer"
         >
-          <span className={$("bg-neutral-400/10 min-w-6 flex justify-center items-center rounded-md text-sm")}>
-            {i + 1}
+          <span className={$("hud-rank", i < 3 && "top")}>
+            {String(i + 1).padStart(2, "0")}
           </span>
           {!!item.extra?.diff && <DiffNumber diff={item.extra.diff} />}
-          <span className="self-start line-height-none">
-            <span className="mr-2 text-base">
+          <span className="flex-1 self-center leading-snug">
+            <span className="mr-2 text-[15px]">
               {item.title}
             </span>
-            <span className="text-xs text-neutral-400/80 truncate align-middle">
+            <span className="font-hud text-xs color-[#8fb8d6] truncate align-middle">
               <ExtraInfo item={item} />
             </span>
+          </span>
+          <span className="hud-meter">
+            {[3, 5, 7, 9, 10].map((h, k) => (
+              <i key={h} className={$(k >= 5 - Math.floor(i / 6) && "off")} style={{ height: `${h}px` }} />
+            ))}
           </span>
         </a>
       ))}
@@ -262,23 +293,26 @@ function NewsListHot({ items }: { items: NewsItem[] }) {
 function NewsListTimeLine({ items }: { items: NewsItem[] }) {
   const { width } = useWindowSize()
   return (
-    <ol className="border-s border-neutral-400/50 flex flex-col ml-1">
+    <ol className="hud-timeline flex flex-col gap-1">
       {items?.map(item => (
         <li key={`${item.id}-${item.pubDate || item?.extra?.date || ""}`} className="flex flex-col">
-          <span className="flex items-center gap-1 text-neutral-400/50 ml--1px">
-            <span className="">-</span>
-            <span className="text-xs text-neutral-400/80">
-              {(item.pubDate || item?.extra?.date) && <NewsUpdatedTime date={(item.pubDate || item?.extra?.date)!} />}
+          <span className="flex items-center gap-2">
+            <span className="hud-node" />
+            <span className="hud-time">
+              {(item.pubDate || item?.extra?.date) && (
+                <>
+                  [
+                  <NewsUpdatedTime date={(item.pubDate || item?.extra?.date)!} />
+                  ]
+                </>
+              )}
             </span>
-            <span className="text-xs text-neutral-400/80">
+            <span className="font-hud text-xs color-[#8fb8d6] truncate">
               <ExtraInfo item={item} />
             </span>
           </span>
           <a
-            className={$(
-              "ml-2 px-1 hover:bg-neutral-400/10 rounded-md visited:(text-neutral-400/80)",
-              "cursor-pointer [&_*]:cursor-pointer transition-all",
-            )}
+            className="hud-row ml-3 px-1.5 py-0.5 text-[15px] leading-snug cursor-pointer [&_*]:cursor-pointer"
             href={width < 768 ? item.mobileUrl || item.url : item.url}
             title={item.extra?.hover}
             target="_blank"

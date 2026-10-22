@@ -15,6 +15,7 @@ import { OverlayScrollbar } from "../common/overlay-scrollbar"
 import type { ItemsProps } from "./card"
 import { CardWrapper } from "./card"
 import { currentColumnIDAtom, currentSourcesAtom } from "~/atoms"
+import { hudColor } from "~/utils/hud"
 
 const AnimationDuration = 200
 const WIDTH = 350
@@ -89,7 +90,7 @@ export function Dnd() {
       </OverlayScrollbar>
       {isMobile && (
         <div className="flex justify-center">
-          <span className="text-sm text-gray-500 text-center">左右滑动查看更多</span>
+          <span className="font-hud text-xs color-[#22e4ff]/60 text-center">{"<< 左右滑动查看更多 >>"}</span>
         </div>
       )}
     </DndWrapper>
@@ -136,35 +137,30 @@ function DndWrapper({ items, setItems, isSingleColumn, sortable, children }: Pro
 
 function CardOverlay({ id }: { id: SourceID }) {
   return (
-    <div className={$(
-      "flex flex-col p-4 backdrop-blur-5",
-      `bg-${sources[id].color}-500 dark:bg-${sources[id].color} bg-op-40!`,
-      !isiOS() && "rounded-2xl",
-    )}
+    <div
+      className="hud-panel flex flex-col p-3"
+      style={{ "--hud": hudColor(sources[id].color) } as React.CSSProperties}
     >
-      <div className={$("flex justify-between mx-2 items-center")}>
+      <div className="flex justify-between mx-1 items-center">
         <div className="flex gap-2 items-center">
           <div
-            className={$("w-8 h-8 rounded-full bg-cover")}
+            className="hud-icon w-8 h-8 bg-cover"
             style={{
               backgroundImage: `url(/icons/${id.split("-")[0]}.png)`,
             }}
           />
           <span className="flex flex-col">
             <span className="flex items-center gap-2">
-              <span className="text-xl font-bold">
+              <span className="hud-title text-xl font-bold">
                 {sources[id].name}
               </span>
-              {sources[id]?.title && <span className={$("text-sm", `color-${sources[id].color} bg-base op-80 bg-op-50! px-1 rounded`)}>{sources[id].title}</span>}
+              {sources[id]?.title && <span className="hud-chip">{sources[id].title}</span>}
             </span>
-            <span className="text-xs op-70">拖拽中</span>
+            <span className="hud-status ok hud-blink">DRAGGING...</span>
           </span>
         </div>
-        <div className={$("flex gap-2 text-lg", `color-${sources[id].color}`)}>
-          <button
-            type="button"
-            className={$("i-ph:dots-six-vertical-duotone", "cursor-grabbing")}
-          />
+        <div className="hud-btn cursor-grabbing">
+          <span className="i-ph:dots-six-vertical-bold" />
         </div>
       </div>
     </div>
@@ -181,7 +177,7 @@ function SortableCardWrapper({ id, sortable }: ItemsProps & { sortable: boolean 
 
   useEffect(() => {
     if (OverlayContainer) {
-      OverlayContainer!.className += $(`bg-base`, !isiOS() && "rounded-2xl")
+      OverlayContainer!.className += " hud-overlay"
     }
   }, [OverlayContainer])
 

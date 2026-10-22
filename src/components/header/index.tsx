@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router"
 import { useIsFetching } from "@tanstack/react-query"
 import type { SourceID } from "@shared/types"
 import { NavBar } from "../navbar"
-import { Menu } from "./menu"
 import { currentSourcesAtom, goToTopAtom } from "~/atoms"
 
 function GoTop() {
@@ -14,12 +13,6 @@ function GoTop() {
       className={$("i-ph:arrow-fat-up-duotone", ok ? "op-50 btn" : "op-0")}
       onClick={goToTop}
     />
-  )
-}
-
-function Github() {
-  return (
-    <button type="button" title="Github" className="i-ph:github-logo-duotone btn" onClick={() => window.open(Homepage)} />
   )
 }
 
@@ -36,43 +29,48 @@ function Refresh() {
   })
 
   return (
-    <button
-      type="button"
-      title="Refresh"
-      className={$("i-ph:arrow-counter-clockwise-duotone btn", isFetching && "animate-spin i-ph:circle-dashed-duotone")}
-      onClick={refreshAll}
-    />
+    <button type="button" title="Refresh" className="hud-ring cursor-pointer" onClick={refreshAll}>
+      <span className={$("text-xl i-ph:arrow-counter-clockwise-bold", isFetching && "animate-spin i-ph:circle-dashed-bold")} />
+    </button>
+  )
+}
+
+const waveHeights = [6, 12, 18, 9, 22, 14, 7, 16, 20, 10, 5, 13, 19, 8, 15, 11]
+
+function Wave() {
+  return (
+    <span className="hud-wave hidden lg:flex ml-3">
+      {waveHeights.map((h, i) => (
+        <i key={i} style={{ height: `${h}px`, animationDelay: `${(i % 5) * -0.2}s` }} />
+      ))}
+    </span>
   )
 }
 
 export function Header() {
   return (
     <>
-      <span className="flex justify-self-start">
+      <span className="flex items-center justify-self-start min-w-0">
         <Link to="/" className="flex gap-2 items-center">
-          <div className="h-10 w-10 bg-cover" title="logo" style={{ backgroundImage: "url(/icon.svg)" }} />
-          <span className="text-2xl font-brand line-height-none!">
-            <p>News</p>
-            <p className="mt--1">
-              <span className="color-primary-6">N</span>
-              <span>ow</span>
-            </p>
+          <div className="h-9 w-9 md:(h-10 w-10) bg-cover shrink-0 drop-shadow-[0_0_8px_rgba(34,228,255,0.6)]" title="logo" style={{ backgroundImage: "url(/icon.svg)" }} />
+          <span className="flex flex-col">
+            <span className="hud-logo-text text-2xl md:text-3xl font-brand line-height-none!">News</span>
+            <span className="font-hud text-[9px] md:text-[10px] color-[#22e4ff]/80 whitespace-nowrap">
+              <span className="hud-blink color-[#3dff8f]">● </span>
+              LIVE SYSTEM ONLINE
+            </span>
           </span>
         </Link>
-        <a target="_blank" href={`${Homepage}/releases/tag/v${Version}`} className="btn text-sm ml-1 font-mono">
-          {`v${Version}`}
-        </a>
+        <Wave />
       </span>
       <span className="justify-self-center">
         <span className="hidden md:(inline-block)">
           <NavBar />
         </span>
       </span>
-      <span className="justify-self-end flex gap-2 items-center text-xl text-primary-600 dark:text-primary">
+      <span className="justify-self-end flex gap-3 items-center text-xl color-[#22e4ff]">
         <GoTop />
         <Refresh />
-        <Github />
-        <Menu />
       </span>
     </>
   )

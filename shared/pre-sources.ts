@@ -139,6 +139,23 @@ export const originSources = {
     interval: Time.Fast,
     home: "https://aihot.news/all",
   },
+  "qbitai": {
+    name: "量子位",
+    type: "realtime",
+    column: "tech",
+    color: "blue",
+    interval: Time.Common,
+    home: "https://www.qbitai.com/",
+  },
+  "aibase": {
+    name: "AIbase",
+    title: "AI资讯",
+    type: "realtime",
+    column: "tech",
+    color: "indigo",
+    interval: Time.Common,
+    home: "https://www.aibase.com/zh/news",
+  },
   "tieba": {
     name: "百度贴吧",
     title: "热议",
@@ -350,12 +367,85 @@ export const originSources = {
     type: "hottest",
     home: "https://www.baidu.com",
   },
+  "nodeseek": {
+    name: "NodeSeek",
+    title: "最新",
+    column: "tech",
+    color: "teal",
+    type: "realtime",
+    home: "https://www.nodeseek.com/",
+  },
+  "xiaohongshu": {
+    name: "小红书",
+    title: "热搜",
+    column: "china",
+    color: "red",
+    type: "hottest",
+    interval: Time.Common,
+    home: "https://www.xiaohongshu.com/",
+  },
+  "youtube": {
+    name: "YouTube",
+    column: "world",
+    color: "red",
+    type: "hottest",
+    interval: Time.Common,
+    home: "https://www.youtube.com/",
+    sub: {
+      us: {
+        title: "美国热门",
+      },
+      tw: {
+        title: "台湾热门",
+      },
+      music: {
+        title: "全球音乐",
+        home: "https://kworb.net/youtube/trending.html",
+      },
+    },
+  },
+  "googlenews": {
+    name: "Google News",
+    column: "world",
+    color: "blue",
+    type: "realtime",
+    interval: Time.Common,
+    home: "https://news.google.com/",
+    sub: {
+      zh: {
+        title: "中文要闻",
+        home: "https://news.google.com/?hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+      },
+      us: {
+        title: "美国要闻",
+        home: "https://news.google.com/?hl=en-US&gl=US&ceid=US:en",
+      },
+    },
+  },
+  "x": {
+    name: "X",
+    column: "world",
+    color: "slate",
+    type: "hottest",
+    interval: Time.Common,
+    home: "https://x.com/explore/tabs/trending",
+    sub: {
+      global: {
+        title: "全球趋势",
+      },
+      us: {
+        title: "美国趋势",
+      },
+      japan: {
+        title: "日本趋势",
+      },
+    },
+  },
   "linuxdo": {
     name: "LINUX DO",
     column: "tech",
     color: "slate",
     home: "https://linux.do/",
-    disable: true,
     sub: {
       latest: {
         title: "最新",
@@ -462,15 +552,6 @@ export const originSources = {
       },
     },
   },
-  "freebuf": {
-    name: "Freebuf",
-    column: "china",
-    title: "网络安全",
-    color: "green",
-    type: "hottest",
-    home: "https://www.freebuf.com/",
-  },
-
   "qqvideo": {
     name: "腾讯视频",
     column: "china",

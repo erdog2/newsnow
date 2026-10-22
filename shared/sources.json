@@ -169,6 +169,23 @@
     "color": "blue",
     "interval": 300000
   },
+  "qbitai": {
+    "name": "量子位",
+    "type": "realtime",
+    "column": "tech",
+    "home": "https://www.qbitai.com/",
+    "color": "blue",
+    "interval": 1800000
+  },
+  "aibase": {
+    "title": "AI资讯",
+    "name": "AIbase",
+    "type": "realtime",
+    "column": "tech",
+    "home": "https://www.aibase.com/zh/news",
+    "color": "indigo",
+    "interval": 1800000
+  },
   "tieba": {
     "title": "热议",
     "name": "百度贴吧",
@@ -441,6 +458,152 @@
     "color": "blue",
     "interval": 600000
   },
+  "nodeseek": {
+    "title": "最新",
+    "name": "NodeSeek",
+    "type": "realtime",
+    "column": "tech",
+    "home": "https://www.nodeseek.com/",
+    "color": "teal",
+    "interval": 600000
+  },
+  "xiaohongshu": {
+    "title": "热搜",
+    "name": "小红书",
+    "type": "hottest",
+    "column": "china",
+    "home": "https://www.xiaohongshu.com/",
+    "color": "red",
+    "interval": 1800000
+  },
+  "youtube": {
+    "redirect": "youtube-us",
+    "name": "YouTube",
+    "type": "hottest",
+    "column": "world",
+    "home": "https://www.youtube.com/",
+    "color": "red",
+    "interval": 1800000,
+    "title": "美国热门"
+  },
+  "youtube-us": {
+    "name": "YouTube",
+    "type": "hottest",
+    "column": "world",
+    "home": "https://www.youtube.com/",
+    "color": "red",
+    "interval": 1800000,
+    "title": "美国热门"
+  },
+  "youtube-tw": {
+    "name": "YouTube",
+    "type": "hottest",
+    "column": "world",
+    "home": "https://www.youtube.com/",
+    "color": "red",
+    "interval": 1800000,
+    "title": "台湾热门"
+  },
+  "youtube-music": {
+    "name": "YouTube",
+    "type": "hottest",
+    "column": "world",
+    "home": "https://kworb.net/youtube/trending.html",
+    "color": "red",
+    "interval": 1800000,
+    "title": "全球音乐"
+  },
+  "googlenews": {
+    "redirect": "googlenews-zh",
+    "name": "Google News",
+    "type": "realtime",
+    "column": "world",
+    "home": "https://news.google.com/?hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+    "color": "blue",
+    "interval": 1800000,
+    "title": "中文要闻"
+  },
+  "googlenews-zh": {
+    "name": "Google News",
+    "type": "realtime",
+    "column": "world",
+    "home": "https://news.google.com/?hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+    "color": "blue",
+    "interval": 1800000,
+    "title": "中文要闻"
+  },
+  "googlenews-us": {
+    "name": "Google News",
+    "type": "realtime",
+    "column": "world",
+    "home": "https://news.google.com/?hl=en-US&gl=US&ceid=US:en",
+    "color": "blue",
+    "interval": 1800000,
+    "title": "美国要闻"
+  },
+  "x": {
+    "redirect": "x-global",
+    "name": "X",
+    "type": "hottest",
+    "column": "world",
+    "home": "https://x.com/explore/tabs/trending",
+    "color": "slate",
+    "interval": 1800000,
+    "title": "全球趋势"
+  },
+  "x-global": {
+    "name": "X",
+    "type": "hottest",
+    "column": "world",
+    "home": "https://x.com/explore/tabs/trending",
+    "color": "slate",
+    "interval": 1800000,
+    "title": "全球趋势"
+  },
+  "x-us": {
+    "name": "X",
+    "type": "hottest",
+    "column": "world",
+    "home": "https://x.com/explore/tabs/trending",
+    "color": "slate",
+    "interval": 1800000,
+    "title": "美国趋势"
+  },
+  "x-japan": {
+    "name": "X",
+    "type": "hottest",
+    "column": "world",
+    "home": "https://x.com/explore/tabs/trending",
+    "color": "slate",
+    "interval": 1800000,
+    "title": "日本趋势"
+  },
+  "linuxdo": {
+    "redirect": "linuxdo-latest",
+    "name": "LINUX DO",
+    "column": "tech",
+    "home": "https://linux.do/latest",
+    "color": "slate",
+    "interval": 600000,
+    "title": "最新"
+  },
+  "linuxdo-latest": {
+    "name": "LINUX DO",
+    "column": "tech",
+    "home": "https://linux.do/latest",
+    "color": "slate",
+    "interval": 600000,
+    "title": "最新"
+  },
+  "linuxdo-hot": {
+    "name": "LINUX DO",
+    "type": "hottest",
+    "column": "tech",
+    "home": "https://linux.do/hot",
+    "color": "slate",
+    "interval": 1800000,
+    "title": "今日最热"
+  },
   "nowcoder": {
     "name": "牛客",
     "type": "hottest",
@@ -536,15 +699,6 @@
     "color": "blue",
     "interval": 1800000,
     "title": "综合早报"
-  },
-  "freebuf": {
-    "title": "网络安全",
-    "name": "Freebuf",
-    "type": "hottest",
-    "column": "china",
-    "home": "https://www.freebuf.com/",
-    "color": "green",
-    "interval": 600000
   },
   "qqvideo": {
     "redirect": "qqvideo-tv-hotsearch",

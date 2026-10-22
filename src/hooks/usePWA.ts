@@ -23,7 +23,7 @@ export function usePWA() {
           action: {
             label: "查看更新",
             onClick: () => {
-              window.open(`${Homepage}/releases/tag/v${Version}`)
+              window.open(`${Homepage}/releases/tag/${Version}`)
             },
           },
         })

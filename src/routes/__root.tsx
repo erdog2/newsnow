@@ -7,9 +7,9 @@ import type { QueryClient } from "@tanstack/react-query"
 import { isMobile } from "react-device-detect"
 import { Header } from "~/components/header"
 import { GlobalOverlayScrollbar } from "~/components/common/overlay-scrollbar"
-import { Footer } from "~/components/footer"
 import { Toast } from "~/components/common/toast"
 import { SearchBar } from "~/components/common/search-bar"
+import { HudBackground } from "~/components/common/hud-background"
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient
@@ -31,22 +31,23 @@ function RootComponent() {
   usePWA()
   return (
     <>
+      <HudBackground />
       <GlobalOverlayScrollbar
         className={$([
           !isMobile && "px-4",
-          "h-full overflow-x-auto",
+          "relative z-1 h-full overflow-x-auto",
           "md:(px-10)",
           "lg:(px-24)",
         ])}
       >
         <header
           className={$([
-            "grid items-center py-4 px-5",
-            "lg:(py-6)",
+            "hud-header grid items-center gap-2 py-3 px-3 mb-4",
+            "md:(px-5) lg:(py-4)",
             "sticky top-0 z-10 backdrop-blur-md",
           ])}
           style={{
-            gridTemplateColumns: "50px auto 50px",
+            gridTemplateColumns: "1fr auto 1fr",
           }}
         >
           <Header />
@@ -60,9 +61,6 @@ function RootComponent() {
         >
           <Outlet />
         </main>
-        <footer className="py-6 flex flex-col items-center justify-center text-sm text-neutral-500 font-mono">
-          <Footer />
-        </footer>
       </GlobalOverlayScrollbar>
       <Toast />
       <SearchBar />

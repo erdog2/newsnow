@@ -9,6 +9,11 @@ export default defineConfig({
     presetWind3(),
     presetIcons({
       scale: 1.2,
+      // 在 VS Code / Cursor 终端中构建时（存在 VSCODE_CWD），预设会跳过本地图标加载，需显式指定
+      collections: {
+        ph: () => import("@iconify-json/ph/icons.json").then(i => i.default as any),
+        si: () => import("@iconify-json/si/icons.json").then(i => i.default as any),
+      },
     }),
   ],
   rules: [
