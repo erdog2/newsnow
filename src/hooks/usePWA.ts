@@ -19,14 +19,7 @@ export function usePWA() {
           onDismiss: update,
         })
       } else if (state === "successful") {
-        toaster("更新成功，赶快体验吧", {
-          action: {
-            label: "查看更新",
-            onClick: () => {
-              window.open(`${Homepage}/releases/tag/${Version}`)
-            },
-          },
-        })
+        toaster("更新成功，赶快体验吧")
       }
     })
   }, [toaster])
