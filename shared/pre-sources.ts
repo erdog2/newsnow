@@ -468,6 +468,8 @@ export const originSources = {
     column: "tech",
     color: "teal",
     type: "realtime",
+    // rss.nodeseek.com blocks requests coming from Cloudflare
+    disable: "cf",
     home: "https://www.nodeseek.com/",
   },
   "xiaohongshu": {

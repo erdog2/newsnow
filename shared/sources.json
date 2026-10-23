@@ -557,6 +557,7 @@
     "title": "最新",
     "name": "NodeSeek",
     "type": "realtime",
+    "disable": "cf",
     "column": "tech",
     "home": "https://www.nodeseek.com/",
     "color": "teal",
