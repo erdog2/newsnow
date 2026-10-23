@@ -186,6 +186,101 @@
     "color": "indigo",
     "interval": 1800000
   },
+  "openai": {
+    "title": "新闻",
+    "name": "OpenAI",
+    "type": "realtime",
+    "column": "tech",
+    "home": "https://openai.com/zh-Hans-CN/news/",
+    "color": "emerald",
+    "interval": 1800000
+  },
+  "anthropic": {
+    "title": "新闻",
+    "name": "Anthropic",
+    "type": "realtime",
+    "column": "tech",
+    "home": "https://www.anthropic.com/news",
+    "color": "orange",
+    "interval": 1800000
+  },
+  "deepmind": {
+    "title": "博客",
+    "name": "Google DeepMind",
+    "type": "realtime",
+    "column": "tech",
+    "home": "https://deepmind.google/blog/",
+    "color": "blue",
+    "interval": 1800000
+  },
+  "metaai": {
+    "title": "博客",
+    "name": "Meta AI",
+    "type": "realtime",
+    "column": "tech",
+    "home": "https://ai.meta.com/blog/",
+    "color": "sky",
+    "interval": 1800000
+  },
+  "msresearch": {
+    "title": "AI",
+    "name": "微软研究院",
+    "type": "realtime",
+    "column": "tech",
+    "home": "https://www.microsoft.com/en-us/research/research-area/artificial-intelligence/",
+    "color": "cyan",
+    "interval": 1800000
+  },
+  "huggingface": {
+    "title": "每日论文",
+    "name": "Hugging Face",
+    "type": "hottest",
+    "column": "tech",
+    "home": "https://huggingface.co/papers",
+    "color": "yellow",
+    "interval": 1800000
+  },
+  "theinformation": {
+    "name": "The Information",
+    "type": "realtime",
+    "column": "tech",
+    "home": "https://www.theinformation.com/",
+    "color": "red",
+    "interval": 1800000
+  },
+  "venturebeat": {
+    "name": "VentureBeat",
+    "type": "realtime",
+    "column": "tech",
+    "home": "https://venturebeat.com/",
+    "color": "rose",
+    "interval": 1800000
+  },
+  "jiqizhixin": {
+    "name": "机器之心",
+    "type": "realtime",
+    "column": "tech",
+    "home": "https://www.jiqizhixin.com/",
+    "color": "teal",
+    "interval": 1800000
+  },
+  "caai": {
+    "title": "学会新闻",
+    "name": "中国人工智能学会",
+    "type": "realtime",
+    "column": "tech",
+    "home": "https://www.caai.cn/",
+    "color": "indigo",
+    "interval": 3600000
+  },
+  "aiera": {
+    "name": "新智元",
+    "type": "realtime",
+    "column": "tech",
+    "home": "https://aiera.com.cn/",
+    "color": "violet",
+    "interval": 1800000
+  },
   "tieba": {
     "title": "热议",
     "name": "百度贴吧",
