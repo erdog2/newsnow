@@ -210,6 +210,67 @@ export const originSources = {
     interval: Time.Common,
     home: "https://huggingface.co/papers",
   },
+  "arena": {
+    name: "Arena Agent 榜",
+    type: "hottest",
+    column: "tech",
+    color: "amber",
+    interval: Time.Slow,
+    home: "https://arena.ai/leaderboard/agent",
+    sub: {
+      overall: {
+        title: "综合",
+        desc: "模型在真实 Agent 会话中的综合表现排名",
+      },
+      steer: {
+        title: "可控性",
+        desc: "模型听从用户指令、按要求调整的能力",
+      },
+      tool: {
+        title: "工具可靠",
+        desc: "调用工具时不编造工具或参数的程度",
+      },
+    },
+  },
+  "artificialanalysis": {
+    name: "Artificial Analysis",
+    type: "hottest",
+    column: "tech",
+    color: "violet",
+    interval: Time.Slow,
+    home: "https://artificialanalysis.ai/",
+    sub: {
+      llm: {
+        title: "语言",
+        desc: "按智能指数（Intelligence Index）排名的语言模型",
+      },
+      image: {
+        title: "图片",
+        desc: "文生图模型，按盲测投票的 Elo 排名",
+        home: "https://artificialanalysis.ai/?category=image",
+      },
+      video: {
+        title: "视频",
+        desc: "文生视频模型，按盲测投票的 Elo 排名",
+        home: "https://artificialanalysis.ai/?category=video",
+      },
+      speech: {
+        title: "语音",
+        desc: "文字转语音模型，按盲测投票的 Elo 排名",
+        home: "https://artificialanalysis.ai/?category=speech",
+      },
+    },
+  },
+  "benchleader": {
+    name: "BenchLeader",
+    title: "综合评分",
+    type: "hottest",
+    column: "tech",
+    color: "purple",
+    interval: Time.Slow,
+    desc: "汇总 240 项公开评测的大模型综合排名，50 分为平均水平",
+    home: "https://www.benchleader.com/",
+  },
   "theinformation": {
     name: "The Information",
     type: "realtime",

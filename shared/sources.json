@@ -240,6 +240,108 @@
     "color": "yellow",
     "interval": 1800000
   },
+  "arena": {
+    "redirect": "arena-overall",
+    "name": "Arena Agent 榜",
+    "type": "hottest",
+    "desc": "模型在真实 Agent 会话中的综合表现排名",
+    "column": "tech",
+    "home": "https://arena.ai/leaderboard/agent",
+    "color": "amber",
+    "interval": 3600000,
+    "title": "综合"
+  },
+  "arena-overall": {
+    "name": "Arena Agent 榜",
+    "type": "hottest",
+    "desc": "模型在真实 Agent 会话中的综合表现排名",
+    "column": "tech",
+    "home": "https://arena.ai/leaderboard/agent",
+    "color": "amber",
+    "interval": 3600000,
+    "title": "综合"
+  },
+  "arena-steer": {
+    "name": "Arena Agent 榜",
+    "type": "hottest",
+    "desc": "模型听从用户指令、按要求调整的能力",
+    "column": "tech",
+    "home": "https://arena.ai/leaderboard/agent",
+    "color": "amber",
+    "interval": 3600000,
+    "title": "可控性"
+  },
+  "arena-tool": {
+    "name": "Arena Agent 榜",
+    "type": "hottest",
+    "desc": "调用工具时不编造工具或参数的程度",
+    "column": "tech",
+    "home": "https://arena.ai/leaderboard/agent",
+    "color": "amber",
+    "interval": 3600000,
+    "title": "工具可靠"
+  },
+  "artificialanalysis": {
+    "redirect": "artificialanalysis-llm",
+    "name": "Artificial Analysis",
+    "type": "hottest",
+    "desc": "按智能指数（Intelligence Index）排名的语言模型",
+    "column": "tech",
+    "home": "https://artificialanalysis.ai/",
+    "color": "violet",
+    "interval": 3600000,
+    "title": "语言"
+  },
+  "artificialanalysis-llm": {
+    "name": "Artificial Analysis",
+    "type": "hottest",
+    "desc": "按智能指数（Intelligence Index）排名的语言模型",
+    "column": "tech",
+    "home": "https://artificialanalysis.ai/",
+    "color": "violet",
+    "interval": 3600000,
+    "title": "语言"
+  },
+  "artificialanalysis-image": {
+    "name": "Artificial Analysis",
+    "type": "hottest",
+    "desc": "文生图模型，按盲测投票的 Elo 排名",
+    "column": "tech",
+    "home": "https://artificialanalysis.ai/?category=image",
+    "color": "violet",
+    "interval": 3600000,
+    "title": "图片"
+  },
+  "artificialanalysis-video": {
+    "name": "Artificial Analysis",
+    "type": "hottest",
+    "desc": "文生视频模型，按盲测投票的 Elo 排名",
+    "column": "tech",
+    "home": "https://artificialanalysis.ai/?category=video",
+    "color": "violet",
+    "interval": 3600000,
+    "title": "视频"
+  },
+  "artificialanalysis-speech": {
+    "name": "Artificial Analysis",
+    "type": "hottest",
+    "desc": "文字转语音模型，按盲测投票的 Elo 排名",
+    "column": "tech",
+    "home": "https://artificialanalysis.ai/?category=speech",
+    "color": "violet",
+    "interval": 3600000,
+    "title": "语音"
+  },
+  "benchleader": {
+    "title": "综合评分",
+    "name": "BenchLeader",
+    "type": "hottest",
+    "desc": "汇总 240 项公开评测的大模型综合排名，50 分为平均水平",
+    "column": "tech",
+    "home": "https://www.benchleader.com/",
+    "color": "purple",
+    "interval": 3600000
+  },
   "theinformation": {
     "name": "The Information",
     "type": "realtime",
